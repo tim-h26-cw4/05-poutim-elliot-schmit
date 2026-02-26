@@ -1,4 +1,16 @@
-import Icons from "./utils/Icons.js";
+import Chef from './Chef.js';
+import Icons from './utils/Icons.js';
 
-// La ligne suivante devrait être au TOUT début du init() du Main
-Icons.load();
+class Main {
+  constructor() {
+    this.init();
+  }
+
+  init() {
+    Icons.load();
+    console.log('init main');
+
+    new Chef();
+  }
+}
+new Main();
