@@ -3,6 +3,7 @@ import Icons from './utils/Icons.js';
 
 class Main {
   constructor() {
+    this.chefs = document.querySelectorAll('.js-chef');
     this.init();
   }
 
@@ -10,7 +11,10 @@ class Main {
     Icons.load();
     console.log('init main');
 
-    new Chef();
+    for (let i = 0; i < this.chefs.length; i++) {
+      const chef = this.chefs[i];
+      new Chef(chef);
+    }
   }
 }
 new Main();
