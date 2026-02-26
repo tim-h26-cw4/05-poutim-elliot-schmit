@@ -2,7 +2,7 @@ export default class Poutine {
   constructor(poutine) {
     this.element = poutine;
     this.type = this.element.querySelectorAll('.js-btn-pout');
-    this.selectedType;
+    this.selectedType = '';
 
     this.init();
   }
@@ -23,15 +23,16 @@ export default class Poutine {
     }
 
     event.currentTarget.classList.add('is-active');
-    this.selectType = event.currentTarget.innerText;
+    this.selectedType = event.currentTarget.innerText;
+    console.log(this.selectedType);
 
     this.updatePhoto(event);
   }
 
-  updatePhoto(event) {
+  updatePhoto() {
     const image = this.element.querySelector('.js-img');
 
     image.classList.add('is-active');
-    image.src = `assets/images/${this.selectType}.png`;
+    image.src = `assets/images/${this.selectedType}.png`;
   }
 }
