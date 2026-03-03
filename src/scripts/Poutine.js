@@ -22,9 +22,13 @@ export default class Poutine {
       bouton.classList.remove('is-active');
     }
 
-    event.currentTarget.classList.add('is-active');
-    this.selectedType = event.currentTarget.innerText;
-    console.log(this.selectedType);
+    if (this.selectedType == '') {
+      event.currentTarget.classList.add('is-active');
+      this.selectedType = event.currentTarget.innerText;
+    } else {
+      event.currentTarget.classList.remove('is-active');
+      this.selectedType = '';
+    }
 
     this.updatePhoto(event);
   }
@@ -32,7 +36,12 @@ export default class Poutine {
   updatePhoto() {
     const image = this.element.querySelector('.js-img');
 
-    image.classList.add('is-active');
-    image.src = `assets/images/${this.selectedType}.png`;
+    if (this.selectedType !== '') {
+      image.classList.add('is-active');
+      image.src = `assets/images/${this.selectedType}.png`;
+    } else {
+      image.classList.remove('is-active');
+      image.src = `assets/images/poutine.png`;
+    }
   }
 }

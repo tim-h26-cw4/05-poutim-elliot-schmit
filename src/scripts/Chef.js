@@ -6,6 +6,7 @@ export default class Chef {
     this.menu = [];
     this.container = this.element.querySelector('.js-order');
     this.totQuantite = 0;
+    this.poutine;
 
     this.init();
   }
@@ -23,30 +24,40 @@ export default class Chef {
       this.menu.push(instance);
     }
 
-    console.log(this.menu);
-
     bouton.addEventListener('click', this.sendOrder.bind(this));
   }
 
   sendOrder() {
-    const order = this.element.querySelector('.js-order');
     this.totQuantite = 0;
 
-    order.innerHTML = '';
-    console.log('sendOrder');
+    this.container.innerHTML = '';
+
+    this.createHeader();
 
     for (let i = 0; i < this.menu.length; i++) {
-      const poutine = this.menu[i];
-      console.log(poutine.selectedType);
+      this.poutine = this.menu[i];
 
-      if (poutine.selectedType != '') {
-        console.log('why');
+      if (this.poutine.selectedType != '') {
         this.totQuantite++;
+
+        this.createListen();
       }
     }
 
     const p = document.createElement('p');
     p.innerText = `Nombre total de poutine(s) :  ${this.totQuantite}`;
-    order.appendChild(p);
+    this.container.appendChild(p);
+  }
+
+  createHeader() {
+    const header = document.createElement('h2');
+    header.innerText = `Voici le résumé de votre commande :`;
+    this.container.appendChild(header);
+  }
+
+  createListen() {
+    const p = document.createElement('p');
+    p.innerText = `Poutine #${this.totQuantite} - ${this.poutine.selectedType}`;
+    this.container.appendChild(p);
   }
 }
